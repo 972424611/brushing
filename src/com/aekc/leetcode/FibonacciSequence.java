@@ -9,10 +9,10 @@ public class FibonacciSequence {
     private int[] a;
 
     public int f(int n) {
-        if(n <= 2) {
+        if (n <= 2) {
             return 1;
         }
-        if(a[n] == 0) {
+        if (a[n] == 0) {
             int k = f(n - 1) + f(n - 2);
             a[n] = k;
             return k;

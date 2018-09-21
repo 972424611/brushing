@@ -16,10 +16,10 @@ public class LongestSubstringWithoutRepeatingCharacters {
         char[] a = s.toCharArray();
         int sum = 0;
         int max = -1;
-        for(int i = 0; i < a.length; i++) {
+        for (int i = 0; i < a.length; i++) {
             String o = String.valueOf(a[i]);
-            if(map.containsKey(o)) {
-                if(max < sum) {
+            if (map.containsKey(o)) {
+                if (max < sum) {
                     max = sum;
                 }
                 sum = 0;
@@ -30,7 +30,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
             map.put(o, i);
             sum++;
         }
-        if(max < sum) {
+        if (max < sum) {
             max = sum;
         }
         return max;

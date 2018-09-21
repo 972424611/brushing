@@ -14,7 +14,7 @@ public class MedianOfTwoSortedArrays {
     }
 
     private void quickSort(int[] array, int first, int last) {
-        if(last > first) {
+        if (last > first) {
             int pivotIndex = partition(array, first, last);
             quickSort(array, first, pivotIndex - 1);
             quickSort(array, pivotIndex + 1, last);
@@ -25,23 +25,23 @@ public class MedianOfTwoSortedArrays {
         int pivot = array[first];
         int low = first + 1;
         int high = last;
-        while(high > low) {
-            while(low <= high && array[low] <= pivot) {
+        while (high > low) {
+            while (low <= high && array[low] <= pivot) {
                 low++;
             }
-            while(low <= high && array[high] > pivot) {
+            while (low <= high && array[high] > pivot) {
                 high--;
             }
-            if(high > low) {
+            if (high > low) {
                 int temp = array[high];
                 array[high] = array[low];
                 array[low] = temp;
             }
         }
-        while(high > first && array[high] >= pivot) {
+        while (high > first && array[high] >= pivot) {
             high--;
         }
-        if(pivot > array[high]) {
+        if (pivot > array[high]) {
             array[first] = array[high];
             array[high] = pivot;
             return high;
@@ -55,7 +55,7 @@ public class MedianOfTwoSortedArrays {
         System.arraycopy(nums1, 0, array, 0, nums1.length);
         System.arraycopy(nums2, 0, array, nums1.length, nums2.length);
         array = quickSort(array);
-        if(array.length % 2 != 0) {
+        if (array.length % 2 != 0) {
             return (double) array[(array.length - 1) / 2];
         } else {
             return ((double) array[(array.length + 1) / 2 - 1] + (double) array[(array.length + 1) / 2]) / 2;

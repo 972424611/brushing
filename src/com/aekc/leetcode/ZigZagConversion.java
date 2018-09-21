@@ -7,7 +7,7 @@ package com.aekc.leetcode;
 public class ZigZagConversion {
 
     public String convert(String s, int numRows) {
-        if(s.length() < 2 || numRows < 2 || s.length() <= numRows) {
+        if (s.length() < 2 || numRows < 2 || s.length() <= numRows) {
             return s;
         }
         int start = 0;
@@ -19,7 +19,7 @@ public class ZigZagConversion {
             String temp = s.substring(start + 1, end);
             if (k % 2 != 0) {
                 temp = new StringBuilder(temp).reverse().toString();
-                while(temp.length() < numRows - 1) {
+                while (temp.length() < numRows - 1) {
                     temp = " " + temp;
                 }
             } else {
@@ -46,17 +46,17 @@ public class ZigZagConversion {
                 end = s.length();
             }
         }
-        for(int i = 0; i < length; i++) {
-            for(int j = 0; j < numRows; j++) {
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < numRows; j++) {
                 System.out.print(c[i][j]);
             }
             System.out.println();
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < numRows; i++) {
-            for(int j = 0; j < length; j++) {
-                if(c[j][i] != ' ' && c[j][i] != '\u0000') {
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < length; j++) {
+                if (c[j][i] != ' ' && c[j][i] != '\u0000') {
                     stringBuilder.append(c[j][i]);
                 }
 
