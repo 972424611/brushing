@@ -19,14 +19,13 @@ public class SwapNodesInPairs {
         ListNode front = head;
         ListNode listNode = null;
         while(front != null && front.next != null) {
+            ListNode temp = front.next.next;
             if(listNode == null) {
-                ListNode temp = front.next.next;
                 ListNode p = front.next;
                 p.next = front;
                 front.next = temp;
                 head = p;
             } else {
-                ListNode temp = front.next.next;
                 ListNode p = front.next;
                 listNode.next = p;
                 p.next = front;
