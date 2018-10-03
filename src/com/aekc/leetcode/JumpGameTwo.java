@@ -8,7 +8,6 @@ import java.util.LinkedList;
  */
 public class JumpGameTwo {
 
-
     public int bfs(int[] nums) {
         LinkedList<Integer> queue = new LinkedList<>();
         int[] size = new int[nums.length];
