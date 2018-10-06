@@ -9,47 +9,45 @@ import java.util.Set;
  */
 public class LongestPalindromicSubstring {
 
-    private String p = "";
-
-    private Set<String> set = new HashSet<>();
-
-    public boolean deal(String s) {
-        for (int i = 0, j = s.length() - 1; i < j; i++, j--) {
-            if (s.charAt(i) != s.charAt(j)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public String longestPalindrome(String s) {
-        if (s.length() <= p.length()) {
-            return p;
+        if(s.length() < 2) {
+            return s;
         }
-        if (set.contains(s)) {
-            return p;
-        } else {
-            set.add(s);
-        }
-        if (!deal(s)) {
-            String q = s;
-            s = q.substring(0, q.length() - 1);
-            longestPalindrome(s);
-            s = q.substring(1, s.length() + 1);
-            longestPalindrome(s);
-        } else {
-            if (p.length() < s.length()) {
-                p = s;
+        String palindromic = "";
+        int j, k;
+        for(int i = 1; i < s.length(); i++) {
+            if(s.length() - i <= palindromic.length() / 2) {
+                break;
+            }
+            int sum = 1;
+            for(j = i - 1, k = i + 1; j >= 0 && k < s.length(); j--, k++) {
+                if(s.charAt(j) != s.charAt(k)) {
+                    break;
+                }
+                sum = sum + 2;
+            }
+            if(sum > palindromic.length()) {
+                palindromic = s.substring(j + 1, k);
+            }
+            sum = 0;
+            for(j = i - 1, k = i; j >= 0 && k < s.length(); j--, k++) {
+                if(s.charAt(j) != s.charAt(k)) {
+                    break;
+                }
+                sum = sum + 2;
+            }
+            if(sum > palindromic.length()) {
+                palindromic = s.substring(j + 1, k);
             }
         }
-        return p;
+        return palindromic;
     }
 
 
     public static void main(String[] args) {
         LongestPalindromicSubstring longestPalindromicSubstring = new LongestPalindromicSubstring();
         //String s = "ibvjkmpyzsifuxcabqqpahjdeuzaybqsrsmbfplxycsafogotliyvhxjtkrbzqxlyfwujzhkdafhebvsdhkkdbhlhmaoxmbkqiwiusngkbdhlvxdyvnjrzvxmukvdfobzlmvnbnilnsyrgoygfdzjlymhprcpxsnxpcafctikxxybcusgjwmfklkffehbvlhvxfiddznwumxosomfbgxoruoqrhezgsgidgcfzbtdftjxeahriirqgxbhicoxavquhbkaomrroghdnfkknyigsluqebaqrtcwgmlnvmxoagisdmsokeznjsnwpxygjjptvyjjkbmkxvlivinmpnpxgmmorkasebngirckqcawgevljplkkgextudqaodwqmfljljhrujoerycoojwwgtklypicgkyaboqjfivbeqdlonxeidgxsyzugkntoevwfuxovazcyayvwbcqswzhytlmtmrtwpikgacnpkbwgfmpavzyjoxughwhvlsxsgttbcyrlkaarngeoaldsdtjncivhcfsaohmdhgbwkuemcembmlwbwquxfaiukoqvzmgoeppieztdacvwngbkcxknbytvztodbfnjhbtwpjlzuajnlzfmmujhcggpdcwdquutdiubgcvnxvgspmfumeqrofewynizvynavjzkbpkuxxvkjujectdyfwygnfsukvzflcuxxzvxzravzznpxttduajhbsyiywpqunnarabcroljwcbdydagachbobkcvudkoddldaucwruobfylfhyvjuynjrosxczgjwudpxaqwnboxgxybnngxxhibesiaxkicinikzzmonftqkcudlzfzutplbycejmkpxcygsafzkgudy";
-        String s = "oooaacaa";
+        String s = "bb";
         s = longestPalindromicSubstring.longestPalindrome(s);
         System.out.println(s);
     }

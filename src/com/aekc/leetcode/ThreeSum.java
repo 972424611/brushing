@@ -26,7 +26,6 @@ public class ThreeSum {
                         if(!list.contains(numsList)) {
                             list.add(numsList);
                         }
-
                         break;
                     }
                 }
