@@ -1,21 +1,20 @@
 package com.aekc.leetcode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author Twilight
- * @date 18-10-14 上午10:11
+ * @date 18-10-14 下午3:41
  */
-public class NQueens {
+public class NQueensTwo {
 
-    private List<List<String>> result = new ArrayList<>();
+    private List<int[][]> list = new ArrayList<>();
 
-    private static int[][] checkerboard;
+    private int[][] checkerboard;
 
     /** N代表皇后个数 */
-    private static int N;
+    private int N;
 
     public void judge(int i, int j) {
         if(checkerboard[i][j] != 0) {
@@ -73,20 +72,7 @@ public class NQueens {
 
                 //当m>=N说明一种情况完成，继续判断下一种情况
                 if(++m >= N) {
-                    StringBuilder s = new StringBuilder();
-                    List<String> tempList = new ArrayList<>();
-                    for(int l = 0; l < N; l++) {
-                        for(int j = 0; j < N; j++) {
-                            if(checkerboard[l][j] == -1) {
-                                s.append('Q');
-                            } else {
-                                s.append('.');
-                            }
-                        }
-                        tempList.add(s.toString());
-                        s = new StringBuilder();
-                    }
-                    result.add(tempList);
+                    list.add(checkerboard);
                     //把当前位置的皇后标识和攻击范围去除
                     toBack(i, --m);
                     //继续下一格
@@ -105,20 +91,15 @@ public class NQueens {
         return false;
     }
 
-    public List<List<String>> solveNQueens(int n) {
+    public int totalNQueens(int n) {
         N = n;
         checkerboard = new int[n][n];
         search(0);
-
-        return result;
+        return list.size();
     }
 
     public static void main(String[] args) {
-        NQueens nQueens = new NQueens();
-        List<List<String>> result = nQueens.solveNQueens(4);
-        for(List<String> list : result) {
-            list.forEach(System.out::println);
-            System.out.println();
-        }
+        NQueensTwo nQueensTwo = new NQueensTwo();
+        System.out.println(nQueensTwo.totalNQueens(1));
     }
 }
