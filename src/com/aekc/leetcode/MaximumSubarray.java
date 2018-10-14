@@ -10,6 +10,7 @@ public class MaximumSubarray {
         if(nums.length < 2) {
             return nums[0];
         }
+
         int max = Integer.MIN_VALUE, k = 0;
         int i = 0, p = 0;
         while(i < nums.length) {
