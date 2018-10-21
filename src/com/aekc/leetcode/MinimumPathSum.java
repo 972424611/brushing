@@ -48,4 +48,5 @@ public class MinimumPathSum {
         MinimumPathSum minimumPathSum = new MinimumPathSum();
         System.out.println(minimumPathSum.minPathSum(new int[][]{{3, 2, 3}, {4, 5, 6}}));
     }
+
 }
