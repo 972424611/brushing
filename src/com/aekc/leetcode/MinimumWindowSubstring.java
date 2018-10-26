@@ -67,11 +67,9 @@ public class MinimumWindowSubstring {
             return "";
         }
         Map<Character, Integer> map = new HashMap<>();
-        for(int i = 0; i < t.length(); i++) {
-            char c = t.charAt(i);
+        for(char c : t.toCharArray()) {
             if(map.containsKey(c)) {
-                int j = map.get(c);
-                map.put(c, ++j);
+                map.put(c, map.get(c) + 1);
             } else {
                 map.put(c, 1);
             }
