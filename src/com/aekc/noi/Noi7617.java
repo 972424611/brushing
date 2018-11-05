@@ -23,8 +23,8 @@ public class Noi7617 {
                 return nums;
             } else if(m > n - q - 1) {
                 m = m - (n - q - 1);
-                n = q;
-                quickSort2(nums, p, q - 1);
+                n = q + 1;
+                quickSort2(nums, p, q);
             } else if(m < n - q - 1) {
                 quickSort2(nums, q + 1, r);
             }
