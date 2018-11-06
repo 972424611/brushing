@@ -43,7 +43,6 @@ public class Noi7620 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        boolean flag = true;
         Noi7620 noi7620 = new Noi7620();
         List<Interval> intervalList = new ArrayList<>();
         for(int i = 0; i < n; i++) {
@@ -54,6 +53,7 @@ public class Noi7620 {
         intervalList = noi7620.merge(intervalList);
         if(intervalList.size() > 1) {
             System.out.println("no");
+            return;
         }
         System.out.println(intervalList.get(0).start + " " + intervalList.get(0).end);
     }
