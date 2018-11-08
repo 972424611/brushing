@@ -8,10 +8,8 @@ public class Noi1789 {
 
     private static double[] nums;
 
-    public static boolean specialCalculation() {
-        if((nums[0] + nums[1]) * (nums[2] + nums[3]) == 24) {
+    public static boolean specialCalculation(double[] nums) {
 
-        }
         return false;
     }
 
@@ -70,6 +68,10 @@ public class Noi1789 {
         }
 
         for(double[] array : list) {
+            if(specialCalculation(array)) {
+                System.out.println("YES");
+                return;
+            }
             if(dfs(0, array)) {
                 System.out.println("YES");
             } else {
