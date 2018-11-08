@@ -6,47 +6,35 @@ import java.util.Scanner;
 
 public class Noi1792 {
 
-    private static char[][] c;
-
     private static boolean[][] flag;
 
-    private static int ha;
-
-    private static int la;
+    private static char[][] c;
 
     private static int hb;
 
     private static int lb;
 
     public static boolean dfs(int x, int y) {
+        flag[x][y] = true;
+        if(x == hb && y == lb && c[x][y] != '#') {
+            return true;
+        }
         if(!flag[x + 1][y]) {
-            if(x == hb && y == lb) {
-                return true;
-            }
             if(dfs(x + 1, y)) {
                 return true;
             }
         }
         if(!flag[x - 1][y]) {
-            if(x == hb && y == lb) {
-                return true;
-            }
             if(dfs(x - 1, y)) {
                 return true;
             }
         }
         if(!flag[x][y + 1]) {
-            if(x == hb && y == lb) {
-                return true;
-            }
             if(dfs(x, y + 1)) {
                 return true;
             }
         }
         if(!flag[x][y - 1]) {
-            if(x == hb && y == lb) {
-                return true;
-            }
             if(dfs(x, y - 1)) {
                 return true;
             }
@@ -58,24 +46,31 @@ public class Noi1792 {
         Scanner scanner = new Scanner(System.in);
         int k = scanner.nextInt();
         List<String> list = new ArrayList<>();
-        for(int i = 0; i < k; i++) {
+        for(int i = 0 ; i < k; i++) {
             int n = scanner.nextInt();
             c = new char[n + 2][n + 2];
             flag = new boolean[n + 2][n + 2];
-            for(int q = 1; q < n + 1; q++) {
-                for(int p = 1; p < n + 1; p++) {
-                    String cTemp;
-                    while(!" ".equals(cTemp = scanner.next()));
-                    c[q][p] = cTemp.charAt(0);
-                    if(c[q][p] == '#' || q == 1 || p == 1 || q == n || p == n) {
+            for(int q = 0; q < n; q++) {
+                String cTemp = scanner.next();
+                for(int p = 0; p < n; p++) {
+                    c[q + 1][p + 1] = cTemp.charAt(p);
+                }
+            }
+            int ha = scanner.nextInt() + 1;
+            int la = scanner.nextInt() + 1;
+            hb = scanner.nextInt() + 1;
+            lb = scanner.nextInt() + 1;
+            for(int q = 0; q < n + 2; q++) {
+                for(int p = 0; p < n + 2; p++) {
+                    if(c[q][p] == '\0' || c[q][p] == '#') {
                         flag[q][p] = true;
                     }
                 }
             }
-            ha = scanner.nextInt();
-            la = scanner.nextInt();
-            hb = scanner.nextInt();
-            lb = scanner.nextInt();
+            if(c[ha][la] == '#') {
+                list.add("NO");
+                continue;
+            }
             if(dfs(ha, la)) {
                 list.add("YES");
             } else {
