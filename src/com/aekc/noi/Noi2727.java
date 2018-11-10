@@ -13,42 +13,42 @@ public class Noi2727 {
 
     private static int ans = 0;
 
+    // 地图的纵向长度
     private static int n;
 
+    // 地图的横向长度
     private static int m;
 
+    // 仙草的纵坐标
     private static int q;
 
+    // 仙草的横坐标
     private static int p;
 
     public static void dfs(int i, int j) {
-        int t = minCoordinate[i][j];
+        int step = minCoordinate[i][j];
         if(i == q && j == p) {
-            ans = t;
+            ans = step;
         }
-        t++;
+        step++;
         //不超界限&&不是怪物&&更优
-        if(i > 0 && coordinate[i - 1][j] != '#' && minCoordinate[i - 1][j] > t) {
-            minCoordinate[i - 1][j] = t;
+        if(i > 0 && coordinate[i - 1][j] != '#' && minCoordinate[i - 1][j] > step) {
+            minCoordinate[i - 1][j] = step;
             dfs(i - 1, j);
         }
-        if(i < n - 1 && coordinate[i + 1][j] != '#' && minCoordinate[i + 1][j] > t) {
-            minCoordinate[i + 1][j] = t;
+        if(i < n - 1 && coordinate[i + 1][j] != '#' && minCoordinate[i + 1][j] > step) {
+            minCoordinate[i + 1][j] = step;
             dfs(i + 1, j);
         }
-        if(j > 0 && coordinate[i][j - 1] != '#' && minCoordinate[i][j - 1] > t) {
-            minCoordinate[i][j - 1] = t;
+        if(j > 0 && coordinate[i][j - 1] != '#' && minCoordinate[i][j - 1] > step) {
+            minCoordinate[i][j - 1] = step;
             dfs(i, j - 1);
         }
-        if(j < m - 1 && coordinate[i][j + 1] != '#' && minCoordinate[i][j + 1] > t) {
-            minCoordinate[i][j + 1] = t;
+        if(j < m - 1 && coordinate[i][j + 1] != '#' && minCoordinate[i][j + 1] > step) {
+            minCoordinate[i][j + 1] = step;
             dfs(i, j + 1);
         }
     }
-
-    private static int sum = 0;
-
-    private static int minSum = 1000000;
 
     public static class Index {
         public int x;
@@ -59,43 +59,42 @@ public class Noi2727 {
         }
     }
 
-/*
-    public static int bfs(Index index) {
+    public static void bfs(Index index) {
         LinkedList<Index> queue = new LinkedList<>();
         queue.offer(index);
         while(!queue.isEmpty()) {
             Index temp = queue.poll();
             int i = temp.x;
             int j = temp.y;
-            sum++;
-            if(coordinate[i][j] == '*') {
-                if(sum <= minSum) {
-                    minSum = sum;
-                    sum = 0;
-                    continue;
-                }
+            // 如果是障碍物
+            if(coordinate[i][j] == '#') {
+                continue;
             }
-
-            if(i > 0 && !flag[i - 1][j]) {
-                flag[i - 1][j] = true;
+            // 如果是仙草
+            if(coordinate[i][j] == '*') {
+                ans = minCoordinate[i][j];
+                break;
+            }
+            // 不超过界线 && 没访问过该点
+            if(i > 0 && minCoordinate[i - 1][j] == Integer.MAX_VALUE) {
+                // 该点对应的minCoordinate的值设置为起点即@的位置到该点的最短距离
+                minCoordinate[i - 1][j] = minCoordinate[i][j] + 1;
                 queue.offer(new Index(i - 1, j));
             }
-            if(i < n - 1 && !flag[i + 1][j]) {
-                flag[i + 1][j] = true;
+            if(i < n - 1 && minCoordinate[i + 1][j] == Integer.MAX_VALUE) {
+                minCoordinate[i + 1][j] = minCoordinate[i][j] + 1;
                 queue.offer(new Index(i + 1, j));
             }
-            if(j > 0 && !flag[i][j - 1]) {
-                flag[i][j - 1] = true;
+            if(j > 0 && minCoordinate[i][j - 1] == Integer.MAX_VALUE) {
+                minCoordinate[i][j - 1] = minCoordinate[i][j] + 1;
                 queue.offer(new Index(i, j - 1));
             }
-            if(j < m - 1 && !flag[i][j + 1]) {
-                flag[i][j + 1] = true;
+            if(j < m - 1 && minCoordinate[i][j + 1] == Integer.MAX_VALUE) {
+                minCoordinate[i][j + 1] = minCoordinate[i][j] + 1;
                 queue.offer(new Index(i, j + 1));
             }
         }
-        return minSum;
     }
-*/
 
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
@@ -113,6 +112,7 @@ public class Noi2727 {
                 String temp = scanner.next();
                 for(int j = 0; j < m; j++) {
                     coordinate[i][j] = temp.charAt(j);
+                    // 没访问的点都设位置为Integer.MAX_VALUE
                     minCoordinate[i][j] = Integer.MAX_VALUE;
                     if(coordinate[i][j] == '@') {
                         x = i;
@@ -123,6 +123,7 @@ public class Noi2727 {
                     }
                 }
             }
+            // 起点到起点为0
             minCoordinate[x][y] = 0;
             dfs(x, y);
             if(ans == 0) {
