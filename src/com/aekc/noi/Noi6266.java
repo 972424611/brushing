@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Noi6266 {
 
-    public static boolean dfs(int n, int m, int k) {
+    public static boolean dfs(long n, long m, long k) {
         if(n == m) {
             if(k % 2 == 0) {
                 return false;
@@ -36,8 +36,8 @@ public class Noi6266 {
         Scanner scanner = new Scanner(System.in);
         List<String> list = new ArrayList<>();
         while(true) {
-            int n = scanner.nextInt();
-            int m = scanner.nextInt();
+            long n = scanner.nextInt();
+            long m = scanner.nextInt();
             if(n == 0 && m == 0) {
                 break;
             }
