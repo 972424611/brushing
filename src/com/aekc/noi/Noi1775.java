@@ -2,6 +2,9 @@ package com.aekc.noi;
 
 import java.util.Scanner;
 
+/**
+ * 01 背包
+ */
 public class Noi1775 {
 
     public static void main(String[] args) {
@@ -17,7 +20,7 @@ public class Noi1775 {
             value[i] = scanner.nextInt();
         }
         for(int i = 1; i <= m; i++) {
-            for(int j = t; j >= 0; j--) {
+            for(int j = t; j >= 1; j--) {
                 if(j >= weight[i]) {
                     if(backpack[i - 1][j] < backpack[i - 1][j - weight[i]] + value[i]) {
                         backpack[i][j] = backpack[i - 1][j - weight[i]] + value[i];
