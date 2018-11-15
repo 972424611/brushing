@@ -4,6 +4,23 @@ import java.util.Scanner;
 
 public class Noi1759 {
 
+    public static int binary(int[] dp, int k, int pos) {
+        int start = 0;
+        int end = pos;
+        int medium = 0;
+        while(start <= end) {
+            medium = (start + end) / 2;
+            if(dp[medium] == k) {
+                return medium;
+            } else if(dp[medium] < k) {
+                start = medium + 1;
+            } else {
+                end = medium - 1;
+            }
+        }
+        return medium;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
@@ -12,32 +29,19 @@ public class Noi1759 {
             return;
         }
         int[] nums = new int[n];
-        int[] sum = new int[n];
-        sum[0] = 1;
-        nums[0] = scanner.nextInt();
-        int max = 1;
-        for(int i = 1; i < n; i++) {
+        int[] dp = new int[n];
+        for(int i = 0; i < n; i++) {
             nums[i] = scanner.nextInt();
-            if(nums[i] > nums[i - 1]) {
-                sum[i] = sum[i - 1] + 1;
-            } else if(nums[i] < nums[i - 1]) {
-                sum[i] = 1;
-                for(int j = i - 2; j >= 0; j--) {
-                    if(nums[j] < nums[i]) {
-                        sum[i] = sum[j] + 1;
-                        break;
-                    } else if(nums[j] == nums[i]) {
-                        sum[i] = sum[j];
-                        break;
-                    }
-                }
-            } else {
-                sum[i] = sum[i - 1];
-            }
-            if(sum[i] > max) {
-                max = sum[i];
-            }
         }
-        System.out.println(max);
+        int pos = 0;
+        dp[0] = nums[0];
+        for(int i = 1; i < n; i++) {
+           if(nums[i] > dp[pos]) {
+               dp[++pos] = nums[i];
+           } else {
+               dp[binary(dp, nums[i], pos)] = nums[i];
+           }
+        }
+        System.out.println(pos + 1);
     }
 }
