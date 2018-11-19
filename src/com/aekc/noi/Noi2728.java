@@ -1,6 +1,7 @@
 package com.aekc.noi;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,6 +32,34 @@ public class Noi2728 {
         return maxPeanut[x][y];
     }
 
+    public static class Index {
+        public int x;
+        public int y;
+        public Index(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public static void bfs(int i, int j) {
+        LinkedList<Index> queue = new LinkedList<>();
+        queue.offer(new Index(i, j));
+        maxPeanut[0][0] = nums[0][0];
+        while(!queue.isEmpty()) {
+            Index index = queue.poll();
+            i = index.x;
+            j = index.y;
+            if(i < r - 1) {
+                maxPeanut[i + 1][j] = Math.max(maxPeanut[i + 1][j], nums[i + 1][j] + maxPeanut[i][j]);
+                queue.offer(new Index(i + 1, j));
+            }
+            if(j < c - 1) {
+                maxPeanut[i][j + 1] = Math.max(maxPeanut[i][j + 1], nums[i][j + 1] + maxPeanut[i][j]);
+                queue.offer(new Index(i, j + 1));
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int t = scanner.nextInt();
@@ -45,7 +74,8 @@ public class Noi2728 {
                     nums[i][j] = scanner.nextInt();
                 }
             }
-            list.add(dp(0, 0));
+            bfs(0, 0);
+            list.add(maxPeanut[r - 1][c - 1]);
         }
         list.forEach(System.out::println);
     }
