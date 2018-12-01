@@ -26,6 +26,7 @@ public class Noi2727 {
     private static int p;
 
     public static void dfs(int i, int j) {
+
         int step = minCoordinate[i][j];
         if(i == q && j == p) {
             ans = step;
