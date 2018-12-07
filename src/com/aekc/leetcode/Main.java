@@ -9,7 +9,7 @@
 // * @author Twilight
 // * @date 18-9-30 下午3:53
 // */
-//public class Main {
+//public class Noi8462 {
 //
 //    public static int dfs(int alice, int bob, int[][] a) {
 //        for(int i = 0; i < 3; i++) {
