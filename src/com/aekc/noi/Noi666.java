@@ -1,7 +1,5 @@
 package com.aekc.noi;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Noi666 {
@@ -27,15 +25,13 @@ public class Noi666 {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        List<Integer> list = new ArrayList<>();
         int t = scanner.nextInt();
         while(t-- != 0) {
             m = scanner.nextInt();
             n = scanner.nextInt();
             dfs(0, 1, m);
-            list.add(sum);
+            System.out.println(sum);
             sum = 0;
         }
-        list.forEach(System.out::println);
     }
 }

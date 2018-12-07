@@ -17,7 +17,6 @@ public class Noi4982 {
             int k = step2 * 2 + step1;
             step1 = step2;
             step2 = k;
-
         }
         System.out.println(step2);
     }
