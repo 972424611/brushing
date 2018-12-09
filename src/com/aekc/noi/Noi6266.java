@@ -8,25 +8,16 @@ public class Noi6266 {
 
     public static boolean dfs(long n, long m, long k) {
         if(n == m) {
-            if(k % 2 == 0) {
-                return false;
-            }
-            return true;
+            return k % 2 != 0;
         }
         if(n < m) {
             if(n * 2 <= m) {
-                if(k % 2 == 0) {
-                    return false;
-                }
-                return true;
+                return k % 2 != 0;
             }
             return dfs(n, m - n, k + 1);
         } else {
             if(m * 2 <= n) {
-                if(k % 2 == 0) {
-                    return false;
-                }
-                return true;
+                return k % 2 != 0;
             }
             return dfs(n - m, m, k + 1);
         }

@@ -48,7 +48,6 @@ public class Noi4980 {
                     minStep[i][j - 1] = step;
                     queue.offer(new Index(i, j - 1));
                 }
-
             }
             if(i < n - 1) {
                 int step = map[i + 1][j] == 'x' ? minStep[i][j] + 2 : minStep[i][j] + 1;

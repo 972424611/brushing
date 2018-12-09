@@ -19,7 +19,7 @@ public class Noi7084 {
     }
 
     public static Index[][] bfs(int i, int j) {
-        LinkedList<Index> queue = new LinkedList();
+        LinkedList<Index> queue = new LinkedList<>();
         queue.add(new Index(i, j));
         Index[][] parent = new Index[5][5];
         boolean[][] isVisit = new boolean[5][5];

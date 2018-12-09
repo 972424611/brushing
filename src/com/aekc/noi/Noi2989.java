@@ -9,22 +9,17 @@ public class Noi2989 {
         int n = scanner.nextInt();
         int k = scanner.nextInt();
         int[] value = new int[n + 1];
-        int total = 0;
+        int[][] backpack = new int[n + 1][k + 1];
         for(int i = 1; i <= n; i++) {
             value[i] = scanner.nextInt();
-            total += value[i];
         }
-        int[] backpack = new int[total + 1];
          
-        int max = 0;
         for(int i = 1; i <= n; i++) {
-            for(int j = total; j >= value[i]; j--) {
-                backpack[j] = Math.max(backpack[j], backpack[j - value[i]] + value[i]);
-                if(backpack[j] % k == 0) {
-                    max = Math.max(backpack[j], max);
-                }
+            for(int j = 0; j < k; j++) {
+                backpack[i][j] = backpack[i - 1][j];
+                backpack[i][j] = Math.max(backpack[i][j], backpack[i - 1][(j - value[i] % k + k) % k] + value[i]);
             }
         }
-        System.out.println(max);
+        System.out.println(backpack[n][0]);
     }
 }

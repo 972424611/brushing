@@ -19,7 +19,7 @@ public class Noi2728 {
         if(maxPeanut[x][y] != 0) {
             return maxPeanut[x][y];
         }
-        if(x == r - 1&& y == c - 1) {
+        if(x == r - 1 && y == c - 1) {
             return nums[x][y];
         }
         if(x == r - 1) {
