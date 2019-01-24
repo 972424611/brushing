@@ -11,22 +11,26 @@ import java.util.List;
 public class SubsetsTwo {
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
         List<List<Integer>> sumList = new ArrayList<>();
         sumList.add(new ArrayList<>());
+        int sum = 0;
         for (int i = 0; i < nums.length; i++) {
             int num = nums[i];
             int length = sumList.size();
-            int index = length - 1;
-            for (int j = 0; j < length; j++) {
+            int index = 0;
+            if(i > 0 && nums[i] == nums[i - 1]) {
+                index = length - sum;
+            }
+            sum = 0;
+            for (int j = index; j < length; j++) {
                 Integer[] number = new Integer[sumList.get(j).size() + 1];
-                if(sumList.get(j).get(sumList.get(j).size() - 1) == num) {
-
-                }
                 for (int k = 0; k < number.length - 1; k++) {
                     number[k] = sumList.get(j).get(k);
                 }
                 number[number.length - 1] = num;
                 sumList.add(Arrays.asList(number));
+                sum++;
             }
         }
         return sumList;
@@ -34,7 +38,7 @@ public class SubsetsTwo {
 
     public static void main(String[] args) {
         SubsetsTwo subsetsTwo = new SubsetsTwo();
-        List<List<Integer>> list = subsetsTwo.subsetsWithDup(new int[] {1, 2, 2, 2, 5, 6, 6});
+        List<List<Integer>> list = subsetsTwo.subsetsWithDup(new int[] {4, 4, 4, 1, 4});
         for(List l : list) {
             System.out.println(l.toString());
         }
