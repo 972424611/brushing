@@ -6,17 +6,22 @@ import java.util.List;
 
 /**
  * @author Twilight
- * @date 18-12-17 下午1:20
+ * @date 19-1-24 下午12:31
  */
-public class Subsets {
+public class SubsetsTwo {
 
-    public List<List<Integer>> subsets(int[] nums) {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> sumList = new ArrayList<>();
         sumList.add(new ArrayList<>());
-        for (int num : nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
             int length = sumList.size();
+            int index = length - 1;
             for (int j = 0; j < length; j++) {
                 Integer[] number = new Integer[sumList.get(j).size() + 1];
+                if(sumList.get(j).get(sumList.get(j).size() - 1) == num) {
+
+                }
                 for (int k = 0; k < number.length - 1; k++) {
                     number[k] = sumList.get(j).get(k);
                 }
@@ -28,8 +33,8 @@ public class Subsets {
     }
 
     public static void main(String[] args) {
-        Subsets subsets = new Subsets();
-        List<List<Integer>> list = subsets.subsets(new int[] {1, 2, 2, 4, 5, 6});
+        SubsetsTwo subsetsTwo = new SubsetsTwo();
+        List<List<Integer>> list = subsetsTwo.subsetsWithDup(new int[] {1, 2, 2, 2, 5, 6, 6});
         for(List l : list) {
             System.out.println(l.toString());
         }
