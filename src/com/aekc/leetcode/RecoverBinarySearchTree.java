@@ -3,6 +3,7 @@ package com.aekc.leetcode;
 /**
  * @author Twilight
  * @date 2019-02-19 10:44
+ * 找到最大最小值，然后替换就行
  */
 public class RecoverBinarySearchTree {
 
